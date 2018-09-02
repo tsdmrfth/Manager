@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducers from './reducers';
 import firebase from 'firebase';
-import {name} from 'app.json';
+import LoginScreen from "./ui/LoginScreen";
 
 /**
  * Created by Fatih Taşdemir on 2.09.2018
@@ -21,17 +20,13 @@ class App extends Component {
             storageBucket: 'manager-d8d87.appspot.com',
             messagingSenderId: '563445212087'
         };
-        firebase.initializeApp(config, name);
+        firebase.initializeApp(config);
     }
 
     render() {
         return (
             <Provider store={createStore(reducers)}>
-                <View>
-                    <Text>
-                        Hello
-                    </Text>
-                </View>
+                <LoginScreen/>
             </Provider>
         );
     }
