@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 import firebase from 'firebase';
 import LoginScreen from "./ui/LoginScreen";
+import './ReactotronConfig';
+import ReduxThunk from 'redux-thunk';
 
 /**
  * Created by Fatih Taşdemir on 2.09.2018
@@ -24,8 +26,10 @@ class App extends Component {
     }
 
     render() {
+        const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
         return (
-            <Provider store={createStore(reducers)}>
+            <Provider store={store}>
                 <LoginScreen/>
             </Provider>
         );

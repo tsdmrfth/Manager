@@ -20,7 +20,8 @@ const style = {
         flexDirection: 'row',
         borderColor: '#ddd',
         position: 'relative',
-        margin: 5
+        margin: 5,
+        borderRadius: 5
     }
 };
 
