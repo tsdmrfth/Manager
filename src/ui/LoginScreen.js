@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import {Button, CardSection, Input} from "../components/common";
+import {Text, View} from 'react-native';
+import {Button, CardSection, Input, Spinner} from "../components/common";
 import {connect} from 'react-redux';
 import {emailChanged, loginUser, passwordChanged} from '../actions';
-import Reactotron from "reactotron-react-native";
 
 /**
  * Created by Fatih Taşdemir on 2.09.2018
@@ -22,6 +21,30 @@ class LoginScreen extends Component {
     onLoginButtonClicked() {
         const {email, password} = this.props;
         this.props.loginUser({email, password});
+    }
+
+    renderError() {
+        if (this.props.error) {
+            return (
+                <Text style={styles.errorTextStyle}>
+                    {this.props.error}
+                </Text>
+            );
+        }
+    }
+
+    renderButton() {
+        if (this.props.loading) {
+            return (
+                <Spinner spinnerSize={'large'}/>
+            );
+        }
+
+        return (
+            <Button
+                label={'Login'}
+                whenClicked={this.onLoginButtonClicked.bind(this)}/>
+        );
     }
 
     render() {
@@ -48,10 +71,10 @@ class LoginScreen extends Component {
                         whenTextChanged={this.onPasswordChanged.bind(this)}/>
                 </CardSection>
 
+                {this.renderError()}
+
                 <CardSection>
-                    <Button
-                        label={'Login'}
-                        whenClicked={this.onLoginButtonClicked.bind(this)}/>
+                    {this.renderButton()}
                 </CardSection>
 
             </View>
@@ -61,12 +84,19 @@ class LoginScreen extends Component {
 
 }
 
-const mapStateToProps = state => {
-    Reactotron.log(JSON.stringify(state.auth) + ' auth');
-    return {
-        email: state.auth.email,
-        password: state.auth.password
+const styles = {
+    errorTextStyle: {
+        alignSelf: 'center',
+        fontSize: 20,
+        color: 'red',
+        marginTop: 5,
+        marginBottom: 5
     }
+};
+
+const mapStateToProps = ({auth}) => {
+    const {email, password, error, loading} = auth;
+    return {email, password, error, loading}
 };
 
 export default connect(mapStateToProps, {emailChanged, passwordChanged, loginUser})(LoginScreen);

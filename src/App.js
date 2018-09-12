@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import reducers from './reducers';
 import firebase from 'firebase';
-import LoginScreen from "./ui/LoginScreen";
 import './ReactotronConfig';
 import ReduxThunk from 'redux-thunk';
+import RouterComponent from "./RouterComponent";
 
 /**
  * Created by Fatih Taşdemir on 2.09.2018
@@ -30,7 +30,7 @@ class App extends Component {
 
         return (
             <Provider store={store}>
-                <LoginScreen/>
+                <RouterComponent/>
             </Provider>
         );
     }
