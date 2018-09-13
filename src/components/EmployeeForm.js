@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
-import {Button, Card, CardSection, Input} from "../components/common";
+import {Picker, Text, View} from 'react-native';
+import {CardSection, Input} from "./common";
 import {connect} from 'react-redux';
-import {formValueChanged} from "../actions";
-import {Picker, Text} from 'react-native';
+import {formValueChanged} from '../actions'
+import log from "../log";
 
 /**
  * Created by Fatih Taşdemir on 13.09.2018
  */
 
-class EmployeeCreateForm extends Component {
+class EmployeeForm extends Component {
 
     render() {
         return (
-            <Card>
-
+            <View>
                 <CardSection>
                     <Input
                         placeholder={'Muro'}
@@ -32,7 +32,7 @@ class EmployeeCreateForm extends Component {
 
                 <CardSection style={{flexDirection: 'row'}}>
 
-                    <Text style={styles.label}>Shift</Text>
+                    <Text style={styles.pickerLabelStyle}>Shift</Text>
                     <Picker
                         style={{flex: 1}}
                         selectedValue={this.props.shift}
@@ -48,14 +48,10 @@ class EmployeeCreateForm extends Component {
 
                     </Picker>
                 </CardSection>
-
-                <CardSection>
-                    <Button label={'Create'}/>
-                </CardSection>
-
-            </Card>
+            </View>
         );
     }
+
 }
 
 const styles = {
@@ -65,9 +61,10 @@ const styles = {
     }
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = state =>{
     const {name, phone, shift} = state.employeeForm;
+    log(state);
     return {name, phone, shift}
 };
 
-export default connect(mapStateToProps, {formValueChanged})(EmployeeCreateForm)
+export default connect(mapStateToProps, {formValueChanged})(EmployeeForm)
