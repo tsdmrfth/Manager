@@ -33,6 +33,7 @@ class EmployeeForm extends Component {
                 <CardSection style={{flexDirection: 'row'}}>
 
                     <Text style={styles.pickerLabelStyle}>Shift</Text>
+
                     <Picker
                         style={{flex: 1}}
                         selectedValue={this.props.shift}
@@ -47,6 +48,7 @@ class EmployeeForm extends Component {
                         <Picker.Item label={'Sunday'} value={'Sunday'}/>
 
                     </Picker>
+
                 </CardSection>
             </View>
         );

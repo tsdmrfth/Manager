@@ -12,3 +12,4 @@ export const FORM_VALUE_CHANGED = 'form_value_changed';
 export const EMPLOYEE_CREATED = 'employee_created';
 export const EMPLOYEES_FETCHED = 'employees_fetched';
 export const UPDATE_EMPLOYEE_SUCCESS= 'update_employee_success';
+export const BACK_BUTTON_CLICKED = 'back_button_clicked';

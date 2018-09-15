@@ -1,7 +1,7 @@
 /**
  * Created by Fatih Taşdemir on 13.09.2018
  */
-import {EMPLOYEE_CREATED, FORM_VALUE_CHANGED, UPDATE_EMPLOYEE_SUCCESS} from "../actions/types";
+import {BACK_BUTTON_CLICKED, EMPLOYEE_CREATED, FORM_VALUE_CHANGED, UPDATE_EMPLOYEE_SUCCESS} from "../actions/types";
 
 const INITIAL_STATE = {name: '', phone: '', shift: ''};
 
@@ -16,6 +16,9 @@ export default (state = INITIAL_STATE, action) => {
 
         case UPDATE_EMPLOYEE_SUCCESS:
             return {INITIAL_STATE};
+
+        case BACK_BUTTON_CLICKED:
+            return INITIAL_STATE;
 
         default:
             return state;

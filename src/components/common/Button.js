@@ -1,8 +1,11 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
+import log from "../../log";
 
-const Button = ({whenClicked, label}) => {
+const Button = (props) => {
     const {buttonStyle, textStyle} = styles;
+    const {whenClicked, label} = props;
+
     return (
         <TouchableOpacity onPress={whenClicked} style={buttonStyle}>
             <Text style={textStyle}>

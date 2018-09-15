@@ -28,6 +28,7 @@ class EmployeeCreateScreen extends Component {
         const {name, phone, shift} = this.props;
         this.props.createEmployee({name, phone, shift: shift || 'Monday'})
     }
+
 }
 
 const mapStateToProps = state => {

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {ListView} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
 import {getEmployees} from "../actions/index";
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import ListItem from "../components/ListItem";
+import log from "../log";
 
 /**
  * Created by Fatih Taşdemir on 13.09.2018
@@ -13,32 +14,30 @@ class EmployeeListScreen extends Component {
 
     componentWillMount() {
         this.props.getEmployees();
-        this.createDataSourceWith(this.props)
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.createDataSourceWith(nextProps)
-    }
+    keyExtractor = (employee) => employee.uid;
 
-    createDataSourceWith({employees}) {
-        const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        });
+    static renderRow(employee) {
+        if (employee !== undefined) {
+            return <ListItem employee={employee.item}/>;
+        }
 
-        this.dataSource = ds.cloneWithRows(employees);
-    }
-
-    render() {
         return (
-            <ListView
-                enableEmptySections
-                dataSource={this.dataSource}
-                renderRow={this.renderRow}/>
+            <View style={{flex: 1, alignItems: 'center'}}>
+                <ActivityIndicator size={'large'}/>
+            </View>
         );
     }
 
-    renderRow(employee) {
-        return <ListItem employee={employee}/>;
+    render() {
+        log('render');
+        return (
+            <FlatList
+                data={this.props.employees}
+                renderItem={(employee) => EmployeeListScreen.renderRow(employee)}
+                keyExtractor={this.keyExtractor}/>
+        );
     }
 
 }
